@@ -1,0 +1,1 @@
+web: gunicorn farmstead.wsgi:application --log-file -
