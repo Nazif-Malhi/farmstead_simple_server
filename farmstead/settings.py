@@ -77,7 +77,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "farmstead.wsgi.application"
 
-
+# print(os.environ.get('ENGINE'))
 DATABASES = {
     "default": {
         "ENGINE": os.environ.get('ENGINE'),
