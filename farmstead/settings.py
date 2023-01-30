@@ -52,7 +52,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    'DEFAULT_RENDERER_CLASSES':(
+    'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     )
 }
@@ -77,15 +77,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "farmstead.wsgi.application"
 
-# print(os.environ.get('ENGINE'))
 DATABASES = {
     "default": {
         "ENGINE": os.environ.get('ENGINE'),
-        "NAME":os.environ.get('NAME'),
-        "USER":os.environ.get('DB_USER'),
+        "NAME": os.environ.get('DB_NAME'),
+        "USER": os.environ.get('DB_USER_NAME'),
         "PASSWORD": os.environ.get('PASSWORD'),
-        "PORT":os.environ.get('PORT'),
-        "HOST":os.environ.get('HOST')
+        "PORT": os.environ.get('PORT'),
+        "HOST": os.environ.get('HOST')
     }
 }
 
@@ -152,9 +151,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = 'authentication.MyUser'
 
 # Email Settings
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
-EMAIL_USE_TLS = True
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
