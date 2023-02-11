@@ -112,7 +112,6 @@ class UpdateProfileView(APIView):
 
 class UserVerifiedView(APIView):
     permission_classes = [IsAuthenticated]
-
     def post(self, request, format=None):
         serializer = SentVerifiedSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)

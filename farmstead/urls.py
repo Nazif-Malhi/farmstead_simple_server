@@ -9,5 +9,6 @@ urlpatterns = [
     path("tests/", include('tests.urls')),
     path("crop-budget-estimator/", include('cropbudgetestimator.urls')),
     path("reports/", include('reports.urls')),
+    path("models/", include('services.urls')),
 
 ]+ static(settings.STATIC_URL, document_root = settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
