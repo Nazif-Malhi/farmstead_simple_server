@@ -96,7 +96,7 @@ class CropDiseaseModel():
             self.crop_des_height, self.crop_des_width))
         x = image.img_to_array(img)
         x = x/255
-        x = x.reshape(-1, crop_des_height, crop_des_width, 3)
+        x = x.reshape(-1, self.crop_des_height, self.crop_des_width, 3)
         result = self.crop_predict_image(x)
         fs.delete(deletePathName)
         return result
