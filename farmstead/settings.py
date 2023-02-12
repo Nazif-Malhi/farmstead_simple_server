@@ -79,13 +79,21 @@ TEMPLATES = [
 WSGI_APPLICATION = "farmstead.wsgi.application"
 
 DATABASES = {
+    # "default": {
+    #     "ENGINE": os.environ.get('ENGINE'),
+    #     "NAME": os.environ.get('DB_NAME'),
+    #     "USER": os.environ.get('DB_USER_NAME'),
+    #     "PASSWORD": os.environ.get('PASSWORD'),
+    #     "PORT": os.environ.get('PORT'),
+    #     "HOST": os.environ.get('HOST')
+    # }
     "default": {
-        "ENGINE": os.environ.get('ENGINE'),
-        "NAME": os.environ.get('DB_NAME'),
-        "USER": os.environ.get('DB_USER_NAME'),
-        "PASSWORD": os.environ.get('PASSWORD'),
-        "PORT": os.environ.get('PORT'),
-        "HOST": os.environ.get('HOST')
+        "ENGINE": os.getenv('ENGINE'),
+        "NAME": os.getenv('DB_NAME'),
+        "USER": os.getenv('DB_USER_NAME'),
+        "PASSWORD": os.getenv('PASSWORD'),
+        "PORT": os.getenv('PORT'),
+        "HOST": os.getenv('HOST')
     }
 }
 
@@ -154,9 +162,17 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = 'authentication.MyUser'
 
 # Email Settings
-EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+# EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+# EMAIL_HOST = os.environ.get('EMAIL_HOST')
+# EMAIL_PORT = os.environ.get('EMAIL_PORT')
+# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+
+
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
