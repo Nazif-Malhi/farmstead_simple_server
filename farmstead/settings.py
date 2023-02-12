@@ -88,12 +88,12 @@ DATABASES = {
     #     "HOST": os.environ.get('HOST')
     # }
     "default": {
-        "ENGINE": os.getenv('ENGINE'),
-        "NAME": os.getenv('DB_NAME'),
-        "USER": os.getenv('DB_USER_NAME'),
-        "PASSWORD": os.getenv('PASSWORD'),
-        "PORT": os.getenv('PORT'),
-        "HOST": os.getenv('HOST')
+        "ENGINE": 'django.db.backends.mysql',
+        "NAME": 'farmstead',
+        "USER": 'admin',
+        "PASSWORD": 'farmstead_1645',
+        "PORT": '8080',
+        "HOST": 'farmstead.cabgzoxvndnm.ap-northeast-1.rds.amazonaws.com'
     }
 }
 
