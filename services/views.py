@@ -5,7 +5,7 @@ from .modelfunctions import *
 # Create your views here.
 
 class PestDetection(views.APIView):
-    def get(self, request, pk=None):
+    def post(self, request, pk=None):
         farmer_id = request.user.id
         queryset = MyUser.objects.filter(id = farmer_id).values()
         fileObj = request.FILES['upload']
@@ -13,7 +13,7 @@ class PestDetection(views.APIView):
         return Response({'result': pest_obj.predict()}, status=200)
 
 class CropDiseaseDetection(views.APIView):
-    def get(self, request, pk=None):
+    def post(self, request, pk=None):
         farmer_id = request.user.id
         queryset = MyUser.objects.filter(id = farmer_id).values()
         fileObj = request.FILES['upload']
@@ -21,7 +21,7 @@ class CropDiseaseDetection(views.APIView):
         return Response({'result': crop_disease_obj.predict()}, status=200)
 
 class SimpleCropPrediction(views.APIView):
-    def get(self, request, pk=None):
+    def post(self, request, pk=None):
         farmer_id = request.user.id
         queryset = MyUser.objects.filter(id = farmer_id).values()
         data = json.loads(request.body)
@@ -29,7 +29,7 @@ class SimpleCropPrediction(views.APIView):
         return Response({'result': simple_crop_obj.predict()}, status=200)
     
 class AdvanceCropPrediction(views.APIView):
-    def get(self, request, pk=None):
+    def post(self, request, pk=None):
         farmer_id = request.user.id
         queryset = MyUser.objects.filter(id = farmer_id).values()
         data = json.loads(request.body)
@@ -37,7 +37,7 @@ class AdvanceCropPrediction(views.APIView):
         return Response({'result': advance_crop_obj.predict()}, status=200)
 
 class FertilizerPrediction(views.APIView):
-    def get(self, request, pk=None):
+    def post(self, request, pk=None):
         data = json.loads(request.body)
         fert_obj = FertilizerModel(data)
         return Response({'result': fert_obj.predict()}, status=200)
