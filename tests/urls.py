@@ -1,9 +1,8 @@
 from django.urls import path
 
-from .views import TestList, TestDetail, SimpleCropRecomendationView, SimpleCropRecomendationDetail, AdvanceCropRecomendationView, AdvanceCropRecomendationDetail, FertilizerRecomendationView, FertilizerRecomendationDetail, CropDiseaseDetectionView, CropDiseaseDetectionDetail, PestDetectionView, PestDetectionDetail,GetAllDataForFarmer 
+from .views import TestList, TestDetail, SimpleCropRecomendationView, SimpleCropRecomendationDetail, AdvanceCropRecomendationView, AdvanceCropRecomendationDetail, FertilizerRecomendationView, FertilizerRecomendationDetail, CropDiseaseDetectionView, CropDiseaseDetectionDetail, PestDetectionView, PestDetectionDetail,GetAllDataForFarmer , AddDataForFarmers
 
 urlpatterns = [
-    
     path('test/', TestList.as_view()),
     path('test/<int:pk>/', TestDetail.as_view()),
     path('simplecroprecomendation/', SimpleCropRecomendationView.as_view()),
@@ -17,5 +16,7 @@ urlpatterns = [
     path('pestdetection/', PestDetectionView.as_view()),
     path('pestdetection/<int:pk>/', PestDetectionDetail.as_view()),
     #############################################################
-    path('get-test-for-farmers/', GetAllDataForFarmer.as_view())
+    path('get-test-for-farmers/', GetAllDataForFarmer.as_view()),
+    path('add-test-for-farmers/', AddDataForFarmers.as_view()),
+
 ]

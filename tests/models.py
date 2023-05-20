@@ -2,7 +2,7 @@ from django.db import models
 from authentication.models import MyUser
 
 class Test(models.Model):
-    test_name = models.CharField(max_length=25)
+    test_name = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     farmer = models.ForeignKey(MyUser, on_delete=models.CASCADE)
@@ -10,13 +10,13 @@ class Test(models.Model):
     def __str__(self):
         return self.test_name
 
-
 class SimpleCropRecomendation(models.Model):
     soil_type = models.CharField(max_length=25)
     temprature = models.CharField(max_length=25)
     humidity = models.CharField(max_length=25)
     ph = models.CharField(max_length=25)
     rain = models.CharField(max_length=25)
+    result = models.CharField(max_length=25)
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
 
     def test_name(self):
@@ -29,7 +29,7 @@ class SimpleCropRecomendation(models.Model):
         return self.test.farmer.id
 
     def __str__(self):
-        return self.test
+        return self.test.test_name
 
 class AdvanceCropRecomendation(models.Model):
     nitrogen_val = models.CharField(max_length=25)
@@ -40,6 +40,7 @@ class AdvanceCropRecomendation(models.Model):
     humidity = models.CharField(max_length=25)
     ph = models.CharField(max_length=25)
     rain = models.CharField(max_length=25)
+    result = models.CharField(max_length=25)
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
 
     def test_name(self):
@@ -53,8 +54,7 @@ class AdvanceCropRecomendation(models.Model):
 
 
     def __str__(self):
-        return self.test
-
+        return self.test.test_name
 class FertilizerRecomendation(models.Model):
     temprature = models.CharField(max_length=25)
     humidity = models.CharField(max_length=25)
@@ -64,6 +64,7 @@ class FertilizerRecomendation(models.Model):
     nitrogen_val = models.CharField(max_length=25)
     phosphorus_val = models.CharField(max_length=25)
     potassium_val = models.CharField(max_length=25)
+    result = models.CharField(max_length=25)
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
 
     def test_name(self):
@@ -76,10 +77,11 @@ class FertilizerRecomendation(models.Model):
         return self.test.farmer.id
 
     def __str__(self):
-        return self.test
+        return self.test.test_name
 
 class PestDetection(models.Model):
     pest_image = models.ImageField(upload_to="pest_detection")
+    result = models.CharField(max_length=25)
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
 
     def test_name(self):
@@ -92,10 +94,11 @@ class PestDetection(models.Model):
         return self.test.farmer.id
 
     def __str__(self):
-        return self.pest_image
+        return self.test.test_name
 
 class CropDiseaseDetection(models.Model):
     crop_desease_image = models.ImageField(upload_to="crop_desease_detection")
+    result = models.CharField(max_length=25)
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
 
     def test_name(self):
@@ -108,4 +111,4 @@ class CropDiseaseDetection(models.Model):
         return self.test.farmer.id
 
     def __str__(self):
-        return self.test
+        return self.test.test_name

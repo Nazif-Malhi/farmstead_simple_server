@@ -42,8 +42,7 @@ class MyUserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
-
-
+    
 class MyUser(AbstractBaseUser):
     email = models.EmailField(
         verbose_name='email address',

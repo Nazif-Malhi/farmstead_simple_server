@@ -5,7 +5,6 @@ from .serializers import ReportsSerializers
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-
 # Create your views here.
 
 class ReportsList(generics.ListCreateAPIView):

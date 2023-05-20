@@ -104,6 +104,7 @@ class UpdateProfileView(APIView):
         if user is not None:
             serializer = MyUsersSerializer(
                 user, data=request.data, partial=True)
+            serializer.is_valid(raise_exception=True)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data)

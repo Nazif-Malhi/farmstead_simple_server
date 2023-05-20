@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import CropBudgetList, CropBudgetDetails, Income_GrossRevenueList, Income_GrossRevenueDetails, Expense_VariableCostList, Expense_VariableCostDetails, FixedCostList, FixedCostDetails, FinancingList, FinancingDetails, GetCropBudgetForFarmers
+from .views import CropBudgetList, CropBudgetDetails, Income_GrossRevenueList, Income_GrossRevenueDetails, Expense_VariableCostList, Expense_VariableCostDetails, FixedCostList, FixedCostDetails, FinancingList, FinancingDetails, GetCropBudgetForFarmers, AddCropBudgetForFarmers, UpdateCropBudgetForFarmers, CropBudgetForPrint, DeleteCropBudgetForFarmers
 
 urlpatterns = [
     path('crop-budget/', CropBudgetList.as_view()),
@@ -14,5 +14,10 @@ urlpatterns = [
     path('financing/', FinancingList.as_view()),
     path('financing/<int:pk>/', FinancingDetails.as_view()),
     ########################################################
-    path('get-crops-budget-for-farmers/', GetCropBudgetForFarmers.as_view())
+    path('get-crops-budget-for-farmers/', GetCropBudgetForFarmers.as_view()),
+    path('add-crops-budget-for-farmers/', AddCropBudgetForFarmers.as_view()),
+    path('update-crops-budget-for-farmers/<int:pk>/', UpdateCropBudgetForFarmers.as_view()),
+    path('get-crop-budget-for-farmers-by/<int:pk>/',CropBudgetForPrint.as_view()),
+    path('delete-crop-budget-for-farmers/<int:pk>/',DeleteCropBudgetForFarmers.as_view())
+
 ]

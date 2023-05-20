@@ -13,11 +13,11 @@ class CropBudget(models.Model):
         return self.cropbudget_name
 
 class Income_GrossRevenue(models.Model):
-    cash_prize = models.IntegerField()
-    expected_yeild = models.SmallIntegerField()
-    acres = models.SmallIntegerField()
-    govt_payments = models.IntegerField()
-    other_income = models.IntegerField()
+    cash_prize = models.IntegerField(blank=True, null=True)
+    expected_yeild = models.SmallIntegerField(blank=True, null=True)
+    acres = models.SmallIntegerField(blank=True, null=True)
+    govt_payments = models.IntegerField(blank=True, null=True)
+    other_income = models.IntegerField(blank=True, null=True)
     cropbudget = models.ForeignKey(CropBudget, on_delete=models.CASCADE)
     
     def cropbudget_name(self):
@@ -29,38 +29,38 @@ class Income_GrossRevenue(models.Model):
     def farmer(self):
         return self.cropbudget.farmer.id
     def __str__(self):
-        return self.cropbudget
+        return self.cropbudget.cropbudget_name
 
 class Expense_VariableCost(models.Model):
-    seed = models.IntegerField()
-    nitrogen = models.IntegerField()
-    phosphorus = models.IntegerField()
-    potassium  = models.IntegerField()
-    sulfur  = models.IntegerField()
-    limestone = models.IntegerField()
-    other_fertilizer = models.IntegerField()
-    herbicides = models.IntegerField()
-    fungicides = models.IntegerField()
-    Insecticides = models.IntegerField()
-    crop_insurance = models.IntegerField()
-    crop_miscellaneous = models.IntegerField()
-    suplies = models.IntegerField()
-    equipment_fuel = models.IntegerField()
-    drying_propane = models.IntegerField()
-    repair_machinery = models.IntegerField()
-    repair_buildings = models.IntegerField()
-    repair_others = models.IntegerField()
-    driver_hire = models.IntegerField()
-    equipment_hire = models.IntegerField()
-    custom_application = models.IntegerField()
-    freight_trucking = models.IntegerField()
-    storage = models.IntegerField()
-    utilities  =models.IntegerField()
-    repair = models.IntegerField()
-    fuel_electricity = models.IntegerField()
-    hired_labour = models.IntegerField()
-    intrest_operating = models.IntegerField()
-    other = models.IntegerField()
+    seed = models.IntegerField(blank=True, null=True)
+    nitrogen = models.IntegerField(blank=True, null=True)
+    phosphorus = models.IntegerField(blank=True, null=True)
+    potassium  = models.IntegerField(blank=True, null=True)
+    sulfur  = models.IntegerField(blank=True, null=True)
+    limestone = models.IntegerField(blank=True, null=True)
+    other_fertilizer = models.IntegerField(blank=True, null=True)
+    herbicides = models.IntegerField(blank=True, null=True)
+    fungicides = models.IntegerField(blank=True, null=True)
+    Insecticides = models.IntegerField(blank=True, null=True)
+    crop_insurance = models.IntegerField(blank=True, null=True)
+    crop_miscellaneous = models.IntegerField(blank=True, null=True)
+    suplies = models.IntegerField(blank=True, null=True)
+    equipment_fuel = models.IntegerField(blank=True, null=True)
+    drying_propane = models.IntegerField(blank=True, null=True)
+    repair_machinery = models.IntegerField(blank=True, null=True)
+    repair_buildings = models.IntegerField(blank=True, null=True)
+    repair_others = models.IntegerField(blank=True, null=True)
+    driver_hire = models.IntegerField(blank=True, null=True)
+    equipment_hire = models.IntegerField(blank=True, null=True)
+    custom_application = models.IntegerField(blank=True, null=True)
+    freight_trucking = models.IntegerField(blank=True, null=True)
+    storage = models.IntegerField(blank=True, null=True)
+    utilities  =models.IntegerField(blank=True, null=True)
+    repair = models.IntegerField(blank=True, null=True)
+    fuel_electricity = models.IntegerField(blank=True, null=True)
+    hired_labour = models.IntegerField(blank=True, null=True)
+    intrest_operating = models.IntegerField(blank=True, null=True)
+    other = models.IntegerField(blank=True, null=True)
     cropbudget = models.ForeignKey(CropBudget, on_delete=models.CASCADE)
 
     def cropbudget_name(self):
@@ -73,15 +73,15 @@ class Expense_VariableCost(models.Model):
         return self.cropbudget.farmer.id
 
     def __str__(self):
-        return self.cropbudget
+        return self.cropbudget.cropbudget_name
 
 class FixedCost(models.Model):
-    farm_insurance = models.IntegerField()
-    real_state_taxes  =models.IntegerField()
-    land_rent = models.IntegerField()
-    interest = models.IntegerField()
-    depreciation = models.IntegerField()
-    other = models.IntegerField()
+    farm_insurance = models.IntegerField(blank=True, null=True)
+    real_state_taxes  =models.IntegerField(blank=True, null=True)
+    land_rent = models.IntegerField(blank=True, null=True)
+    interest = models.IntegerField(blank=True, null=True)
+    depreciation = models.IntegerField(blank=True, null=True)
+    other = models.IntegerField(blank=True, null=True)
     cropbudget = models.ForeignKey(CropBudget, on_delete=models.CASCADE)
 
     def cropbudget_name(self):
@@ -94,13 +94,13 @@ class FixedCost(models.Model):
         return self.cropbudget.farmer.id
 
     def __str__(self):
-        return self.cropbudget
+        return self.cropbudget.cropbudget_name
 
 class Financing(models.Model):
-    income_taxes = models.IntegerField()
-    owner_withdrawal = models.IntegerField()
-    principle_payment = models.IntegerField()
-    other = models.IntegerField()
+    income_taxes = models.IntegerField(blank=True, null=True)
+    owner_withdrawal = models.IntegerField(blank=True, null=True)
+    principle_payment = models.IntegerField(blank=True, null=True)
+    other = models.IntegerField(blank=True, null=True)
     cropbudget = models.ForeignKey(CropBudget, on_delete=models.CASCADE)
 
     def cropbudget_name(self):
@@ -113,7 +113,7 @@ class Financing(models.Model):
         return self.cropbudget.farmer.id
 
     def __str__(self):
-        return self.cropbudget
+        return self.cropbudget.cropbudget_name
 
 
 

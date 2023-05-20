@@ -25,3 +25,13 @@ class FinancingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Financing
         fields  = ('__all__')
+
+class CropSerializer(serializers.Serializer):
+    crop_budget = CropBudgetSerializer()
+    income_gross = Income_GrossRevenueSerializer()
+    expense_variable = Expense_VariableCostSerializer()
+    fixed_cost = FixedCostSerializer()
+    financing = FinancingSerializer()
+    
+    class Meta:
+        fields = ('crop_budget','income_gross', 'expense_variable', 'fixed_cost', 'financing')
