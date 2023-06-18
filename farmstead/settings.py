@@ -79,22 +79,22 @@ TEMPLATES = [
 WSGI_APPLICATION = "farmstead.wsgi.application"
 
 DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get('ENGINE'),
-        "NAME": os.environ.get('DB_NAME'),
-        "USER": os.environ.get('DB_USER_NAME'),
-        "PASSWORD": os.environ.get('PASSWORD'),
-        "PORT": os.environ.get('PORT'),
-        "HOST": os.environ.get('HOST')
-    }
     # "default": {
-    #     "ENGINE": 'django.db.backends.mysql',
-    #     "NAME": 'farmstead',
-    #     "USER": 'admin',
-    #     "PASSWORD": 'farmstead_1645',
-    #     "PORT": '8080',
-    #     "HOST": 'farmstead.cabgzoxvndnm.ap-northeast-1.rds.amazonaws.com'
+    #     "ENGINE": os.environ.get('ENGINE'),
+    #     "NAME": os.environ.get('DB_NAME'),
+    #     "USER": os.environ.get('DB_USER_NAME'),
+    #     "PASSWORD": os.environ.get('PASSWORD'),
+    #     "PORT": os.environ.get('PORT'),
+    #     "HOST": os.environ.get('HOST')
     # }
+    "default": {
+        "ENGINE": 'django.db.backends.mysql',
+        "NAME": 'farmstead',
+        "USER": 'admin',
+        "PASSWORD": 'farmstead_1645',
+        "PORT": '8080',
+        "HOST": 'farmstead.cabgzoxvndnm.ap-northeast-1.rds.amazonaws.com'
+    }
 }
 
 
