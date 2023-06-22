@@ -1,3 +1,4 @@
+import datetime
 from rest_framework import serializers
 from .models import CropBudget, Income_GrossRevenue, Expense_VariableCost, FixedCost, Financing
 
@@ -35,3 +36,4 @@ class CropSerializer(serializers.Serializer):
     
     class Meta:
         fields = ('crop_budget','income_gross', 'expense_variable', 'fixed_cost', 'financing')
+

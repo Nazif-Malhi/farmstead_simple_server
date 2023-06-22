@@ -1,8 +1,11 @@
+import datetime
 from rest_framework import generics, views
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.db import transaction
 import json
+from django.db.models import Sum
+
 
 
 
@@ -336,7 +339,6 @@ class DeleteCropBudgetForFarmers(views.APIView):
 
 class CropBudgetForPrint(views.APIView):
     permission_classes=[IsAuthenticated]
-    
     def get(self, request, pk):
         crop_budget = CropBudget.objects.filter(pk = pk).values()
         if crop_budget:
@@ -358,3 +360,71 @@ class CropBudgetForPrint(views.APIView):
             return Response({"Success":response_data})
         else:
             return Response({"Error":"Data Not Found"})
+
+class ProfitByMonthView(views.APIView):
+    def get(self, request, *args, **kwargs):
+        profit_by_month = {}
+
+        # Retrieve all crop budgets
+        crop_budgets = CropBudget.objects.all()
+
+        # Iterate over each crop budget
+        for crop_budget in crop_budgets:
+            # Calculate the total income for the crop budget
+            total_income = Income_GrossRevenue.objects.filter(cropbudget=crop_budget).aggregate(Sum('cash_prize'))['cash_prize__sum'] or 0
+
+            # Get the variable costs for the crop budget
+            variable_costs = Expense_VariableCost.objects.filter(cropbudget=crop_budget)
+
+            # Calculate the total variable costs for the crop budget
+            variable_cost_fields = [
+                'seed', 'nitrogen', 'phosphorus', 'potassium', 'sulfur', 'limestone',
+                'other_fertilizer', 'herbicides', 'fungicides', 'Insecticides',
+                'crop_insurance', 'crop_miscellaneous', 'suplies', 'equipment_fuel',
+                'drying_propane', 'repair_machinery', 'repair_buildings', 'repair_others',
+                'driver_hire', 'equipment_hire', 'custom_application', 'freight_trucking',
+                'storage', 'utilities', 'repair', 'fuel_electricity', 'hired_labour',
+                'intrest_operating', 'other'
+            ]
+            total_variable_costs = sum(
+                variable_costs.aggregate(Sum(field)).get(field + "__sum") or 0
+                for field in variable_cost_fields
+            )
+
+            # Get the fixed costs for the crop budget
+            fixed_costs = FixedCost.objects.filter(cropbudget=crop_budget)
+
+            # Calculate the total fixed costs for the crop budget
+            fixed_cost_fields = ['farm_insurance', 'real_state_taxes', 'land_rent', 'interest', 'depreciation', 'other']
+            total_fixed_costs = sum(
+                fixed_costs.aggregate(Sum(field)).get(field + "__sum") or 0
+                for field in fixed_cost_fields
+            )
+
+            # Get the financing costs for the crop budget
+            financing_costs = Financing.objects.filter(cropbudget=crop_budget)
+
+            # Calculate the total financing costs for the crop budget
+            financing_cost_fields = ['income_taxes', 'owner_withdrawal', 'principle_payment', 'other']
+            total_financing_costs = sum(
+                financing_costs.aggregate(Sum(field)).get(field + "__sum") or 0
+                for field in financing_cost_fields
+            )
+
+            # Calculate the total expenses for the crop budget
+            total_expenses = total_variable_costs + total_fixed_costs + total_financing_costs
+
+            # Calculate the profit for the crop budget
+            total_profit = total_income - total_expenses
+
+            # Get the month and year of the crop budget's creation date
+            month = crop_budget.created_at.month
+            year = crop_budget.created_at.year
+
+            # Append the profit to the corresponding month and year in the dictionary
+            month_year_key = f"{month}-{year}"
+            profit_by_month.setdefault(month_year_key, 0)
+            profit_by_month[month_year_key] += total_profit
+
+        return Response(profit_by_month)
+    
